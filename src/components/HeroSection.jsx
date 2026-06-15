@@ -126,16 +126,16 @@ const HeroSection = () => {
               
               {/* Social Links */}
               <div className="mt-8 flex gap-4 justify-center lg:justify-start">
-                <a href="#" className="bg-white/40 backdrop-blur-sm p-2 rounded-full hover:bg-pink-100 transition duration-300 shadow-md">
+                <a href="/skill" className="bg-white/40 backdrop-blur-sm p-2 rounded-full hover:bg-pink-100 transition duration-300 shadow-md">
                   <span className="text-2xl">📷</span>
                 </a>
-                <a href="#" className="bg-white/40 backdrop-blur-sm p-2 rounded-full hover:bg-pink-100 transition duration-300 shadow-md">
+                <a href="/project" className="bg-white/40 backdrop-blur-sm p-2 rounded-full hover:bg-pink-100 transition duration-300 shadow-md">
                   <span className="text-2xl">🐦</span>
                 </a>
-                <a href="#" className="bg-white/40 backdrop-blur-sm p-2 rounded-full hover:bg-pink-100 transition duration-300 shadow-md">
+                <a href="/contact" className="bg-white/40 backdrop-blur-sm p-2 rounded-full hover:bg-pink-100 transition duration-300 shadow-md">
                   <span className="text-2xl">💼</span>
                 </a>
-                <a href="#" className="bg-white/40 backdrop-blur-sm p-2 rounded-full hover:bg-pink-100 transition duration-300 shadow-md">
+                <a href="/about" className="bg-white/40 backdrop-blur-sm p-2 rounded-full hover:bg-pink-100 transition duration-300 shadow-md">
                   <span className="text-2xl">🎨</span>
                 </a>
               </div>
