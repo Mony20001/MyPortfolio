@@ -35,16 +35,16 @@ const Project = () => {
         },
         {
             id: 2,
-            title: 'Kitty Task Manager',
+            title: 'Portfolio',
             category: 'web',
-            image: 'https://via.placeholder.com/400x300/FFC0CB/FFFFFF?text=Kitty+Tasks',
+            image: '/image/folio.png',
             icon: '✅',
             description: 'Cute task management tool with Hello Kitty theme, real-time updates, and team collaboration.',
-            tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Socket.io', 'Tailwind'],
-            github: 'https://github.com',
-            demo: 'https://demo.com',
+            tech: ['React Js', 'Java Scripe', 'Tailwind', 'Css',],
+            github: 'https://github.com/Mony20001/MyPortfolio.git',
+            demo: 'my-portfolio-teal-beta-11.vercel.app',
             featured: true,
-            year: '2024'
+            year: '2026'
         },
         {
             id: 3,
