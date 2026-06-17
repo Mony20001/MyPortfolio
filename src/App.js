@@ -6,6 +6,7 @@ import SkillPage from './page/SkillPage';
 import ProjectPage from './page/ProjectPage';
 import ContactPage from './page/ContactPage';
 import AboutPage from './page/AboutPage'
+import Certificate from './components/Certificate';
 function App() {
   return (
     <Router>
@@ -17,6 +18,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/skill" element={<SkillPage />} />
           <Route path="/project" element={<ProjectPage />} />
+          <Route path="/certificate" element={<Certificate />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
