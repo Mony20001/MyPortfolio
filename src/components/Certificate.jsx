@@ -172,7 +172,7 @@ const Certificate = () => {
     // 🔐 Handle admin login
     const handleAdminLogin = (e) => {
         e.preventDefault();
-        const ADMIN_PASSWORD = 'mony2024'; // 👈 Change this!
+        const ADMIN_PASSWORD = '1111'; // 👈 Change this!
         
         if (password === ADMIN_PASSWORD) {
             setIsAdmin(true);
