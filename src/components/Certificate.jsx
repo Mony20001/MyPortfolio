@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
+
 const Certificate = () => {
     const [selectedCert, setSelectedCert] = useState(null);
     const [certificates, setCertificates] = useState(() => {
@@ -18,7 +19,7 @@ const Certificate = () => {
                 description: 'Completed full-stack web development with React, Node.js, and MongoDB',
                 credential: 'CRED-2024-001',
                 image: '🏆',
-                imageUrl: '/image/c++.png',
+                imageUrl: 'public/image/c++.png',
                 orientation: 'landscape'
             },
             {
@@ -31,7 +32,7 @@ const Certificate = () => {
                 description: 'Mastered user interface design, prototyping, and user experience principles',
                 credential: 'CRED-2023-045',
                 image: '✨',
-                imageUrl: null,
+                imageUrl: '/image/folio.png',
                 orientation: 'portrait'
             },
             {
@@ -44,7 +45,7 @@ const Certificate = () => {
                 description: 'Advanced JavaScript concepts: ES6+, Async/Await, and Design Patterns',
                 credential: 'CRED-2023-089',
                 image: '⭐',
-                imageUrl: null,
+                imageUrl: '/image/c++.png',
                 orientation: 'landscape'
             }
         ];
@@ -340,8 +341,6 @@ const Certificate = () => {
                         <div
                             key={cert.id}
                             className="relative group"
-                            onMouseEnter={() => setHoveredCert(cert.id)}
-                            onMouseLeave={() => setHoveredCert(null)}
                         >
                             <div
                                 className={`
