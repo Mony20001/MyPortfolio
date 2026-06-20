@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const Certificate = () => {
     const [selectedCert, setSelectedCert] = useState(null);
+    const [hoveredCert, setHoveredCert] = useState(null);
     const [certificates, setCertificates] = useState(() => {
         const saved = localStorage.getItem('myCertificates');
         if (saved) {
@@ -18,11 +19,8 @@ const Certificate = () => {
                 description: 'Completed full-stack web development with React, Node.js, and MongoDB',
                 credential: 'CRED-2024-001',
                 image: '🏆',
-                imageUrl: null,
-                orientation: 'landscape',
-                imageWidth: 1350,
-                imageHeight: 1080,
-                displaySize: 'Landscape (1350×1080px)'
+                imageUrl: '/image/c++.png',
+                orientation: 'landscape'
             },
             {
                 id: 2,
@@ -35,10 +33,7 @@ const Certificate = () => {
                 credential: 'CRED-2023-045',
                 image: '✨',
                 imageUrl: null,
-                orientation: 'portrait',
-                imageWidth: 1080,
-                imageHeight: 1350,
-                displaySize: 'Portrait (1080×1350px)'
+                orientation: 'portrait'
             },
             {
                 id: 3,
@@ -51,58 +46,7 @@ const Certificate = () => {
                 credential: 'CRED-2023-089',
                 image: '⭐',
                 imageUrl: null,
-                orientation: 'landscape',
-                imageWidth: 1350,
-                imageHeight: 1080,
-                displaySize: 'Landscape (1350×1080px)'
-            },
-            {
-                id: 4,
-                title: 'Responsive Web Design',
-                issuer: 'FreeCodeCamp',
-                date: 'September 2023',
-                icon: '📱',
-                color: 'from-green-400 to-emerald-400',
-                description: 'Created responsive websites using CSS Flexbox, Grid, and Media Queries',
-                credential: 'CRED-2023-112',
-                image: '🎯',
-                imageUrl: null,
-                orientation: 'landscape',
-                imageWidth: 1350,
-                imageHeight: 1080,
-                displaySize: 'Landscape (1350×1080px)'
-            },
-            {
-                id: 5,
-                title: 'Python Programming',
-                issuer: 'Coding Ninjas',
-                date: 'August 2023',
-                icon: '🐍',
-                color: 'from-blue-500 to-cyan-400',
-                description: 'Python fundamentals, data structures, and automation scripts',
-                credential: 'CRED-2023-156',
-                image: '🚀',
-                imageUrl: null,
-                orientation: 'portrait',
-                imageWidth: 1080,
-                imageHeight: 1350,
-                displaySize: 'Portrait (1080×1350px)'
-            },
-            {
-                id: 6,
-                title: 'Digital Marketing',
-                issuer: 'Marketing Pro',
-                date: 'July 2023',
-                icon: '📊',
-                color: 'from-red-400 to-pink-400',
-                description: 'SEO, Social Media Marketing, and Content Strategy',
-                credential: 'CRED-2023-178',
-                image: '💡',
-                imageUrl: null,
-                orientation: 'landscape',
-                imageWidth: 1350,
-                imageHeight: 1080,
-                displaySize: 'Landscape (1350×1080px)'
+                orientation: 'landscape'
             }
         ];
     });
@@ -118,11 +62,7 @@ const Certificate = () => {
         color: 'from-pink-400 to-purple-400',
         imageFile: null,
         imagePreview: null,
-        orientation: 'landscape',
-        imageWidth: 1350,
-        imageHeight: 1080,
-        displaySize: 'Landscape (1350×1080px)',
-        imageWarning: ''
+        orientation: 'landscape'
     });
     const [editingId, setEditingId] = useState(null);
     const fileInputRef = useRef(null);
@@ -169,34 +109,10 @@ const Certificate = () => {
     // Icon options
     const iconOptions = ['🌐', '🎨', '💻', '📱', '🐍', '📊', '🏆', '✨', '⭐', '🎯', '🚀', '💡', '📜', '🎓'];
 
-    // 📐 CERTIFICATE SIZE GUIDE
-    const certificateSizes = {
-        portrait: {
-            width: 1080,
-            height: 1350,
-            ratio: '4:5',
-            label: 'Portrait',
-            icon: '📱',
-            display: 'Portrait (1080×1350px)',
-            cssHeight: 'h-48',
-            description: 'Perfect for certificates, diplomas, and awards'
-        },
-        landscape: {
-            width: 1350,
-            height: 1080,
-            ratio: '5:4',
-            label: 'Landscape',
-            icon: '🖥️',
-            display: 'Landscape (1350×1080px)',
-            cssHeight: 'h-32',
-            description: 'Ideal for achievements, badges, and completions'
-        }
-    };
-
     // 🔐 Handle admin login
     const handleAdminLogin = (e) => {
         e.preventDefault();
-        const ADMIN_PASSWORD = '1111'; // 👈 Change this!
+        const ADMIN_PASSWORD = 'mony2024'; // 👈 ប្តូរពាក្យសម្ងាត់នេះ!
         
         if (password === ADMIN_PASSWORD) {
             setIsAdmin(true);
@@ -240,40 +156,18 @@ const Certificate = () => {
                     const width = img.width;
                     const height = img.height;
                     let orientation = 'landscape';
-                    let warning = '';
-                    let displaySize = '';
-                    let imageWidth = width;
-                    let imageHeight = height;
 
                     if (height > width) {
                         orientation = 'portrait';
-                        displaySize = certificateSizes.portrait.display;
-                        imageWidth = width;
-                        imageHeight = height;
-                        if (Math.abs(height - certificateSizes.portrait.height) > 200 || 
-                            Math.abs(width - certificateSizes.portrait.width) > 200) {
-                            warning = `💡 Recommended portrait size: ${certificateSizes.portrait.width}×${certificateSizes.portrait.height}px (4:5 ratio)`;
-                        }
                     } else {
                         orientation = 'landscape';
-                        displaySize = certificateSizes.landscape.display;
-                        imageWidth = width;
-                        imageHeight = height;
-                        if (Math.abs(width - certificateSizes.landscape.width) > 200 || 
-                            Math.abs(height - certificateSizes.landscape.height) > 200) {
-                            warning = `💡 Recommended landscape size: ${certificateSizes.landscape.width}×${certificateSizes.landscape.height}px (5:4 ratio)`;
-                        }
                     }
 
                     setUploadData({
                         ...uploadData,
                         imageFile: file,
                         imagePreview: reader.result,
-                        orientation: orientation,
-                        imageWidth: imageWidth,
-                        imageHeight: imageHeight,
-                        displaySize: displaySize,
-                        imageWarning: warning
+                        orientation: orientation
                     });
                 };
                 img.src = reader.result;
@@ -299,10 +193,7 @@ const Certificate = () => {
             credential: uploadData.credential || `CRED-${Date.now()}`,
             image: uploadData.imagePreview ? '📷' : uploadData.image,
             imageUrl: uploadData.imagePreview || null,
-            orientation: uploadData.orientation || 'landscape',
-            imageWidth: uploadData.imageWidth || (uploadData.orientation === 'portrait' ? 1080 : 1350),
-            imageHeight: uploadData.imageHeight || (uploadData.orientation === 'portrait' ? 1350 : 1080),
-            displaySize: uploadData.displaySize || (uploadData.orientation === 'portrait' ? 'Portrait (1080×1350px)' : 'Landscape (1350×1080px)')
+            orientation: uploadData.orientation || 'landscape'
         };
 
         if (editingId) {
@@ -333,11 +224,7 @@ const Certificate = () => {
             color: cert.color,
             imageFile: null,
             imagePreview: cert.imageUrl,
-            orientation: cert.orientation || 'landscape',
-            imageWidth: cert.imageWidth || (cert.orientation === 'portrait' ? 1080 : 1350),
-            imageHeight: cert.imageHeight || (cert.orientation === 'portrait' ? 1350 : 1080),
-            displaySize: cert.displaySize || (cert.orientation === 'portrait' ? 'Portrait (1080×1350px)' : 'Landscape (1350×1080px)'),
-            imageWarning: ''
+            orientation: cert.orientation || 'landscape'
         });
         setShowUploadModal(true);
     };
@@ -363,11 +250,7 @@ const Certificate = () => {
             color: 'from-pink-400 to-purple-400',
             imageFile: null,
             imagePreview: null,
-            orientation: 'landscape',
-            imageWidth: 1350,
-            imageHeight: 1080,
-            displaySize: 'Landscape (1350×1080px)',
-            imageWarning: ''
+            orientation: 'landscape'
         });
         setEditingId(null);
         if (fileInputRef.current) {
@@ -382,10 +265,6 @@ const Certificate = () => {
         } else {
             setShowPasswordModal(true);
         }
-    };
-
-    const getSizeInfo = (orientation) => {
-        return orientation === 'portrait' ? certificateSizes.portrait : certificateSizes.landscape;
     };
 
     return (
@@ -404,46 +283,6 @@ const Certificate = () => {
                     <p className="text-gray-600 mt-2 text-lg">
                         Professional achievements and certifications 🎓
                     </p>
-                    
-                    {/* 📐 CERTIFICATE SIZE GUIDE */}
-                    <div className="mt-6 bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border-2 border-pink-200 max-w-3xl mx-auto">
-                        <h3 className="text-lg font-bold text-pink-700 mb-4 flex items-center justify-center gap-2">
-                            <span>📐</span> Certificate Size Guide
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 border-2 border-purple-200">
-                                <div className="flex items-center justify-center gap-2 mb-2">
-                                    <span className="text-3xl">📱</span>
-                                    <span className="font-bold text-purple-700">Portrait</span>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold text-purple-600">1080 × 1350px</div>
-                                    <div className="text-sm text-gray-600">4:5 Aspect Ratio</div>
-                                    <div className="text-xs text-gray-500 mt-1">Perfect for: Certificates, Diplomas, Awards</div>
-                                    <div className="mt-2 bg-purple-100 rounded-full px-3 py-1 text-xs text-purple-700 inline-block">
-                                        ✅ Vertical Layout
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 border-2 border-blue-200">
-                                <div className="flex items-center justify-center gap-2 mb-2">
-                                    <span className="text-3xl">🖥️</span>
-                                    <span className="font-bold text-blue-700">Landscape</span>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold text-blue-600">1350 × 1080px</div>
-                                    <div className="text-sm text-gray-600">5:4 Aspect Ratio</div>
-                                    <div className="text-xs text-gray-500 mt-1">Perfect for: Achievements, Badges, Completions</div>
-                                    <div className="mt-2 bg-blue-100 rounded-full px-3 py-1 text-xs text-blue-700 inline-block">
-                                        ✅ Horizontal Layout
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-3 text-center text-xs text-gray-500">
-                            💡 Max file size: 5MB • Formats: JPEG, PNG, GIF, WEBP • Auto-detect orientation
-                        </div>
-                    </div>
 
                     {/* Admin Controls */}
                     <div className="mt-4 flex justify-center gap-3 flex-wrap">
@@ -498,111 +337,102 @@ const Certificate = () => {
 
                 {/* Certificate Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {certificates.map((cert) => {
-                        const sizeInfo = getSizeInfo(cert.orientation);
-                        return (
+                    {certificates.map((cert) => (
+                        <div
+                            key={cert.id}
+                            className="relative group"
+                            onMouseEnter={() => setHoveredCert(cert.id)}
+                            onMouseLeave={() => setHoveredCert(null)}
+                        >
                             <div
-                                key={cert.id}
-                                className="relative group"
+                                className={`
+                                    bg-white rounded-2xl shadow-lg overflow-hidden 
+                                    transition-all duration-300 transform hover:scale-105 hover:shadow-2xl
+                                    border-2 border-pink-100 hover:border-pink-300
+                                    cursor-pointer
+                                `}
+                                onClick={() => setSelectedCert(cert)}
                             >
-                                <div
-                                    className={`
-                                        bg-white rounded-2xl shadow-lg overflow-hidden 
-                                        transition-all duration-300 transform hover:scale-105 hover:shadow-2xl
-                                        border-2 border-pink-100 hover:border-pink-300
-                                        cursor-pointer
-                                    `}
-                                    onClick={() => setSelectedCert(cert)}
-                                >
-                                    {/* Certificate Image */}
-                                    <div className={`
-                                        bg-gradient-to-r ${cert.color} 
-                                        flex items-center justify-center relative
-                                        ${sizeInfo.cssHeight}
-                                    `}>
-                                        {cert.imageUrl ? (
-                                            <img 
-                                                src={cert.imageUrl} 
-                                                alt={cert.title}
-                                                className={`
-                                                    h-full w-full object-cover
-                                                    ${cert.orientation === 'portrait' ? 'object-top' : 'object-center'}
-                                                `}
-                                            />
-                                        ) : (
-                                            <div className="text-6xl transform group-hover:scale-110 transition-transform duration-300">
-                                                {cert.image}
-                                            </div>
-                                        )}
-                                        
-                                        {/* Orientation Badge */}
-                                        <div className="absolute top-2 right-2 bg-white/30 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-semibold text-white flex items-center gap-1">
-                                            {sizeInfo.icon}
-                                            <span className="capitalize">{cert.orientation}</span>
+                                {/* Certificate Image */}
+                                <div className={`
+                                    bg-gradient-to-r ${cert.color} 
+                                    flex items-center justify-center relative
+                                    ${cert.orientation === 'portrait' ? 'h-48' : 'h-32'}
+                                `}>
+                                    {cert.imageUrl ? (
+                                        <img 
+                                            src={cert.imageUrl} 
+                                            alt={cert.title}
+                                            className="h-full w-full object-cover"
+                                        />
+                                    ) : (
+                                        <div className="text-6xl transform group-hover:scale-110 transition-transform duration-300">
+                                            {cert.image}
                                         </div>
-                                        
-                                        {/* Size Info */}
-                                        <div className="absolute bottom-2 left-2 bg-white/30 backdrop-blur-sm rounded-full px-2 py-1 text-xs text-white">
-                                            {cert.imageWidth}×{cert.imageHeight}px
-                                        </div>
-                                        
-                                        <div className="absolute bottom-2 right-2 bg-white/30 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold text-white">
-                                            {cert.date}
-                                        </div>
-                                        
-                                        {/* Edit/Delete Buttons - Only visible to admin */}
-                                        {isAdmin && (
-                                            <div className="absolute top-2 left-2 flex gap-1">
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        handleEditCertificate(cert);
-                                                    }}
-                                                    className="bg-white/80 hover:bg-white rounded-full w-7 h-7 flex items-center justify-center text-xs transition-all shadow-md"
-                                                    title="Edit Certificate"
-                                                >
-                                                    ✏️
-                                                </button>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        handleDeleteCertificate(cert.id);
-                                                    }}
-                                                    className="bg-white/80 hover:bg-white rounded-full w-7 h-7 flex items-center justify-center text-xs transition-all shadow-md"
-                                                    title="Delete Certificate"
-                                                >
-                                                    🗑️
-                                                </button>
-                                            </div>
-                                        )}
+                                    )}
+                                    
+                                    <div className="absolute top-2 right-2 bg-white/30 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-semibold text-white">
+                                        {cert.orientation === 'portrait' ? '📱 Portrait' : '🖥️ Landscape'}
                                     </div>
+                                    
+                                    <div className="absolute bottom-2 left-2 bg-white/30 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold text-white">
+                                        {cert.issuer}
+                                    </div>
+                                    <div className="absolute bottom-2 right-2 bg-white/30 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold text-white">
+                                        {cert.date}
+                                    </div>
+                                    
+                                    {/* Edit/Delete Buttons - Only visible to admin */}
+                                    {isAdmin && (
+                                        <div className="absolute top-2 left-2 flex gap-1">
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleEditCertificate(cert);
+                                                }}
+                                                className="bg-white/80 hover:bg-white rounded-full w-7 h-7 flex items-center justify-center text-xs transition-all shadow-md"
+                                                title="Edit Certificate"
+                                            >
+                                                ✏️
+                                            </button>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleDeleteCertificate(cert.id);
+                                                }}
+                                                className="bg-white/80 hover:bg-white rounded-full w-7 h-7 flex items-center justify-center text-xs transition-all shadow-md"
+                                                title="Delete Certificate"
+                                            >
+                                                🗑️
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
 
-                                    {/* Certificate Content */}
-                                    <div className="p-5">
-                                        <div className="flex items-start justify-between mb-2">
-                                            <h3 className="text-lg font-bold text-gray-800">
-                                                {cert.title}
-                                            </h3>
-                                            <span className="text-2xl">{cert.icon}</span>
+                                {/* Certificate Content */}
+                                <div className="p-5">
+                                    <div className="flex items-start justify-between mb-2">
+                                        <h3 className="text-lg font-bold text-gray-800">
+                                            {cert.title}
+                                        </h3>
+                                        <span className="text-2xl">{cert.icon}</span>
+                                    </div>
+                                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                                        {cert.description}
+                                    </p>
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center gap-1 text-xs text-gray-500">
+                                            <span>🔑</span>
+                                            <span>{cert.credential}</span>
                                         </div>
-                                        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                                            {cert.description}
-                                        </p>
-                                        <div className="flex items-center justify-between flex-wrap gap-2">
-                                            <div className="flex items-center gap-1 text-xs text-gray-500">
-                                                <span>🔑</span>
-                                                <span>{cert.credential}</span>
-                                            </div>
-                                            <div className="flex items-center gap-1 text-xs text-gray-400">
-                                                <span>📐</span>
-                                                <span>{cert.displaySize}</span>
-                                            </div>
-                                        </div>
+                                        <button className="text-pink-500 hover:text-pink-700 text-sm font-semibold transition-colors">
+                                            View Details →
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        );
-                    })}
+                        </div>
+                    ))}
                 </div>
 
                 {/* Decorative Elements */}
@@ -682,11 +512,6 @@ const Certificate = () => {
                                     <span className="text-gray-500">Credential ID:</span>
                                     <span className="font-mono text-pink-600">{selectedCert.credential}</span>
                                 </div>
-                                <div className="flex items-center justify-center gap-2 text-xs text-gray-400 mt-1">
-                                    <span>📐 {selectedCert.imageWidth}×{selectedCert.imageHeight}px</span>
-                                    <span>•</span>
-                                    <span>{selectedCert.orientation === 'portrait' ? '4:5 Ratio' : '5:4 Ratio'}</span>
-                                </div>
                             </div>
                             
                             <div className="flex gap-2 justify-center flex-wrap">
@@ -705,7 +530,7 @@ const Certificate = () => {
                 </div>
             )}
 
-            {/* Password Modal - Only visible to non-admin users */}
+            {/* Password Modal */}
             {showPasswordModal && !isAdmin && (
                 <div 
                     className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in"
@@ -769,7 +594,7 @@ const Certificate = () => {
                 </div>
             )}
 
-            {/* Upload/Edit Modal - Only visible to admin */}
+            {/* Upload/Edit Modal */}
             {showUploadModal && isAdmin && (
                 <div 
                     className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in"
@@ -801,29 +626,6 @@ const Certificate = () => {
                         </h2>
 
                         <div className="space-y-4">
-                            {/* Size Guide */}
-                            <div className="bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 rounded-xl p-4 border-2 border-pink-200">
-                                <h3 className="font-semibold text-pink-700 mb-3 flex items-center gap-2">
-                                    <span>📐</span> Certificate Size Guide
-                                </h3>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className="bg-white/80 rounded-lg p-3 text-center border-2 border-purple-200">
-                                        <div className="text-3xl mb-1">📱</div>
-                                        <div className="font-bold text-purple-700">Portrait</div>
-                                        <div className="text-sm font-semibold text-purple-600">1080 × 1350px</div>
-                                        <div className="text-xs text-gray-500">4:5 Ratio</div>
-                                        <div className="text-xs text-green-600 mt-1">✅ Vertical</div>
-                                    </div>
-                                    <div className="bg-white/80 rounded-lg p-3 text-center border-2 border-blue-200">
-                                        <div className="text-3xl mb-1">🖥️</div>
-                                        <div className="font-bold text-blue-700">Landscape</div>
-                                        <div className="text-sm font-semibold text-blue-600">1350 × 1080px</div>
-                                        <div className="text-xs text-gray-500">5:4 Ratio</div>
-                                        <div className="text-xs text-green-600 mt-1">✅ Horizontal</div>
-                                    </div>
-                                </div>
-                            </div>
-
                             {/* Image Upload */}
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -850,15 +652,7 @@ const Certificate = () => {
                                                 }`}
                                             />
                                             <div className="mt-2 text-sm text-gray-600">
-                                                <span className="font-semibold">
-                                                    {uploadData.orientation === 'portrait' ? '📱 Portrait' : '🖥️ Landscape'}
-                                                </span>
-                                                <span className="ml-2 text-xs text-gray-400">
-                                                    {uploadData.imageWidth}×{uploadData.imageHeight}px
-                                                </span>
-                                                {uploadData.imageWarning && (
-                                                    <p className="text-yellow-600 text-xs mt-1">{uploadData.imageWarning}</p>
-                                                )}
+                                                {uploadData.orientation === 'portrait' ? '📱 Portrait' : '🖥️ Landscape'}
                                             </div>
                                             <button
                                                 onClick={(e) => {
@@ -866,8 +660,7 @@ const Certificate = () => {
                                                     setUploadData({
                                                         ...uploadData,
                                                         imagePreview: null,
-                                                        imageFile: null,
-                                                        imageWarning: ''
+                                                        imageFile: null
                                                     });
                                                     if (fileInputRef.current) {
                                                         fileInputRef.current.value = '';
@@ -897,10 +690,7 @@ const Certificate = () => {
                                     <button
                                         onClick={() => setUploadData({
                                             ...uploadData, 
-                                            orientation: 'portrait',
-                                            imageWidth: 1080,
-                                            imageHeight: 1350,
-                                            displaySize: 'Portrait (1080×1350px)'
+                                            orientation: 'portrait'
                                         })}
                                         className={`p-3 rounded-xl border-2 transition-all ${
                                             uploadData.orientation === 'portrait'
@@ -910,16 +700,12 @@ const Certificate = () => {
                                     >
                                         <div className="text-2xl">📱</div>
                                         <div className="font-semibold">Portrait</div>
-                                        <div className="text-xs text-gray-500">1080×1350px</div>
-                                        <div className="text-xs text-purple-600">4:5 Ratio</div>
+                                        <div className="text-xs text-gray-500">Vertical</div>
                                     </button>
                                     <button
                                         onClick={() => setUploadData({
                                             ...uploadData, 
-                                            orientation: 'landscape',
-                                            imageWidth: 1350,
-                                            imageHeight: 1080,
-                                            displaySize: 'Landscape (1350×1080px)'
+                                            orientation: 'landscape'
                                         })}
                                         className={`p-3 rounded-xl border-2 transition-all ${
                                             uploadData.orientation === 'landscape'
@@ -929,8 +715,7 @@ const Certificate = () => {
                                     >
                                         <div className="text-2xl">🖥️</div>
                                         <div className="font-semibold">Landscape</div>
-                                        <div className="text-xs text-gray-500">1350×1080px</div>
-                                        <div className="text-xs text-blue-600">5:4 Ratio</div>
+                                        <div className="text-xs text-gray-500">Horizontal</div>
                                     </button>
                                 </div>
                             </div>
@@ -1045,13 +830,6 @@ const Certificate = () => {
                                         />
                                     ))}
                                 </div>
-                            </div>
-
-                            {/* Display Size Info */}
-                            <div className="bg-gray-50 rounded-xl p-3 text-center border border-gray-200">
-                                <p className="text-sm text-gray-600">
-                                    📐 Certificate will be stored as: <span className="font-semibold text-pink-600">{uploadData.displaySize}</span>
-                                </p>
                             </div>
 
                             {/* Submit Button */}
