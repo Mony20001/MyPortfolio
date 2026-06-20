@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const Certificate = () => {
     const [selectedCert, setSelectedCert] = useState(null);
-    const [hoveredCert, setHoveredCert] = useState(null);
     const [certificates, setCertificates] = useState(() => {
         const saved = localStorage.getItem('myCertificates');
         if (saved) {
@@ -197,7 +196,7 @@ const Certificate = () => {
     // 🔐 Handle admin login
     const handleAdminLogin = (e) => {
         e.preventDefault();
-        const ADMIN_PASSWORD = 'mony2024'; // 👈 Change this!
+        const ADMIN_PASSWORD = '1111'; // 👈 Change this!
         
         if (password === ADMIN_PASSWORD) {
             setIsAdmin(true);
