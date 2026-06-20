@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 
 const Certificate = () => {
     const [selectedCert, setSelectedCert] = useState(null);
-    const [hoveredCert, setHoveredCert] = useState(null);
     const [certificates, setCertificates] = useState(() => {
         const saved = localStorage.getItem('myCertificates');
         if (saved) {
