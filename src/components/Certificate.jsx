@@ -504,7 +504,6 @@ const Certificate = () => {
                             <div
                                 key={cert.id}
                                 className="relative group"
-                                onMouseEnter={() => setHoveredCert(cert.id)}
                             >
                                 <div
                                     className={`
