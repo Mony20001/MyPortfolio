@@ -11,10 +11,9 @@ const Certificate = () => {
             date: 'March 15 2025',
             icon: '🌐',
             color: 'from-pink-400 to-purple-400',
-            description: 'Completed Basic of C++ with praties and project ',
+            description: 'Completed Basic of C++ with practice and project',
             credential: '0009879ETEC',
-            image: '',
-            // Full certificate images (no crop, showing entire certificate)
+            image: '', // This should be a URL or emoji, but it's empty
             certificateImage: {
                 portrait: '/image/c++.png',
                 landscape: '/image/c++.png'
@@ -23,7 +22,7 @@ const Certificate = () => {
                 portrait: '/image/c++.png',
                 landscape: '/image/c++.png'
             },
-            skills: ['Advance C++','OOP', 'Algorithm', 'MySQL Database'],
+            skills: ['Advance C++', 'OOP', 'Algorithm', 'MySQL Database'],
             level: 'Beginner'
         },
         {
@@ -54,7 +53,7 @@ const Certificate = () => {
             date: 'March 15 2026',
             icon: '💻',
             color: 'from-yellow-400 to-orange-400',
-            description: 'Complete Java with proect course ',
+            description: 'Complete Java with project course',
             credential: '2604114ETEC',
             image: '',
             certificateImage: {
@@ -70,12 +69,12 @@ const Certificate = () => {
         },
         {
             id: 4,
-            title: ' Web Frontend',
+            title: 'Web Frontend',
             issuer: 'គ្រូអាយធីចិត្តល្អ',
             date: 'December 15 2025',
             icon: '📱',
             color: 'from-green-400 to-emerald-400',
-            description: 'Complete Frontend with pratices course and project',
+            description: 'Complete Frontend with practices course and project',
             credential: '0008902ETEC',
             image: '',
             certificateImage: {
@@ -86,7 +85,7 @@ const Certificate = () => {
                 portrait: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
                 landscape: '/image/frontend.jpg'
             },
-            skills: ['HTML', 'CSS', 'JavaScript', 'Bootstrap','ReactJs'],
+            skills: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'ReactJs'],
             level: 'Beginner'
         },
         {
@@ -96,7 +95,7 @@ const Certificate = () => {
             date: 'February 15 2025',
             icon: '🐍',
             color: 'from-blue-400 to-cyan-400',
-            description: 'complete basic computer and networking',
+            description: 'Complete basic computer and networking',
             credential: '0009702ETEC',
             image: '',
             certificateImage: {
@@ -112,12 +111,12 @@ const Certificate = () => {
         },
         {
             id: 6,
-            title: 'Deploma(12)',
+            title: 'Diploma (12)',
             issuer: 'Marketing Pro',
             date: 'December 8 2024',
             icon: '📊',
             color: 'from-red-400 to-pink-400',
-            description: 'Gradute high school',
+            description: 'Graduate high school',
             credential: 'Room22 table542',
             image: '',
             certificateImage: {
@@ -128,7 +127,7 @@ const Certificate = () => {
                 portrait: 'https://images.unsplash.com/photo-1432889821006-2d28494f4aec?w=400&h=300&fit=crop',
                 landscape: '/image/deploma.jpg'
             },
-            skills: ['B', 'E', 'B', 'C','B','B','F'],
+            skills: ['B', 'E', 'B', 'C', 'B', 'B', 'F'],
             level: 'Beginner'
         },
         {
@@ -159,7 +158,7 @@ const Certificate = () => {
             date: 'November 10 2024',
             icon: '📊',
             color: 'from-red-400 to-pink-400',
-            description: 'Reinvent: Transform Your habits,Transform Your life',
+            description: 'Reinvent: Transform Your habits, Transform Your life',
             credential: 'CRED-2023-178',
             image: '',
             certificateImage: {
@@ -176,7 +175,7 @@ const Certificate = () => {
         {
             id: 9,
             title: 'សិក្ខាសាលា',
-            issuer: 'Beltie ',
+            issuer: 'Beltie',
             date: 'August 6 2025',
             icon: '📊',
             color: 'from-red-400 to-pink-400',
@@ -397,8 +396,6 @@ const Certificate = () => {
                         <div
                             key={cert.id}
                             className="group relative clickable-area"
-                            // onMouseEnter={() => setHoveredCert(cert.id)}
-                            // onMouseLeave={() => setHoveredCert(null)}
                         >
                             <div
                                 className={`
@@ -414,24 +411,28 @@ const Certificate = () => {
                                     flex items-center justify-center relative
                                     overflow-hidden
                                 `}>
+                                    {/* FIX 1: Remove opacity that was making images too transparent */}
                                     <img 
                                         src={getImage(cert.thumbnail, 'landscape')} 
                                         alt={cert.title}
-                                        className="hidden md:block w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+                                        className="hidden md:block w-full h-full object-cover"
                                     />
                                     <img 
                                         src={getImage(cert.thumbnail, 'portrait')} 
                                         alt={cert.title}
-                                        className="md:hidden w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+                                        className="md:hidden w-full h-full object-cover"
                                     />
                                     
                                     <div className="absolute inset-0 bg-gradient-to-t from-pink-900/60 via-pink-800/30 to-transparent"></div>
                                     
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="text-8xl transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 drop-shadow-2xl">
-                                            {cert.image}
+                                    {/* FIX 2: Show icon only if image is empty or missing */}
+                                    {(!cert.thumbnail || !getImage(cert.thumbnail, 'landscape')) && (
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <div className="text-8xl transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 drop-shadow-2xl">
+                                                {cert.icon}
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
 
                                     <div className="absolute top-4 right-4">
                                         <span className={`
@@ -561,10 +562,15 @@ const Certificate = () => {
                                             src={getImage(selectedCert.certificateImage, 'landscape')} 
                                             alt={selectedCert.title}
                                             className="certificate-modal-image"
-                                            style={{
-                                                maxHeight: '70vh',
-                                                width: '100%',
-                                                objectFit: 'contain'
+                                            onError={(e) => {
+                                                // FIX 3: Handle image loading errors
+                                                e.target.style.display = 'none';
+                                                e.target.parentElement.innerHTML = `
+                                                    <div class="flex items-center justify-center p-8 text-gray-400">
+                                                        <span class="text-6xl">📜</span>
+                                                        <span class="ml-3">Certificate Image Not Available</span>
+                                                    </div>
+                                                `;
                                             }}
                                         />
                                     </div>
@@ -575,10 +581,14 @@ const Certificate = () => {
                                             src={getImage(selectedCert.certificateImage, 'portrait')} 
                                             alt={selectedCert.title}
                                             className="certificate-modal-image"
-                                            style={{
-                                                maxHeight: '70vh',
-                                                width: '100%',
-                                                objectFit: 'contain'
+                                            onError={(e) => {
+                                                e.target.style.display = 'none';
+                                                e.target.parentElement.innerHTML = `
+                                                    <div class="flex items-center justify-center p-8 text-gray-400">
+                                                        <span class="text-6xl">📜</span>
+                                                        <span class="ml-3">Certificate Image Not Available</span>
+                                                    </div>
+                                                `;
                                             }}
                                         />
                                     </div>
@@ -619,16 +629,18 @@ const Certificate = () => {
                             </p>
 
                             {/* Skills */}
-                            <div className="flex flex-wrap gap-2 justify-center mb-6">
-                                {selectedCert.skills.map((skill, idx) => (
-                                    <span 
-                                        key={idx}
-                                        className="px-3 py-1 bg-pink-50 rounded-full text-sm text-pink-600 border border-pink-200"
-                                    >
-                                        💕 {skill}
-                                    </span>
-                                ))}
-                            </div>
+                            {selectedCert.skills && selectedCert.skills.length > 0 && (
+                                <div className="flex flex-wrap gap-2 justify-center mb-6">
+                                    {selectedCert.skills.map((skill, idx) => (
+                                        <span 
+                                            key={idx}
+                                            className="px-3 py-1 bg-pink-50 rounded-full text-sm text-pink-600 border border-pink-200"
+                                        >
+                                            💕 {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
                             
                             <div className="bg-pink-50 rounded-xl p-4 mb-6 border border-pink-200 max-w-md mx-auto">
                                 <div className="flex items-center justify-center gap-2 text-sm">
