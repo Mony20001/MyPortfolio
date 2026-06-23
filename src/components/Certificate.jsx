@@ -397,8 +397,8 @@ const Certificate = () => {
                         <div
                             key={cert.id}
                             className="group relative clickable-area"
-                            onMouseEnter={() => setHoveredCert(cert.id)}
-                            onMouseLeave={() => setHoveredCert(null)}
+                            // onMouseEnter={() => setHoveredCert(cert.id)}
+                            // onMouseLeave={() => setHoveredCert(null)}
                         >
                             <div
                                 className={`
