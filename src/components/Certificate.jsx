@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 const Certificate = () => {
     const [selectedCert, setSelectedCert] = useState(null);
-    const [hoveredCert, setHoveredCert] = useState(null);
-
     // Certificate data with full certificate images
     const certificates = [
         {
