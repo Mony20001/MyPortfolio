@@ -57,11 +57,11 @@ const Certificate = () => {
             credential: '2604114ETEC',
             image: '',
             certificateImage: {
-                portrait: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&h=600&fit=contain',
+                portrait: '/image/java.jpg',
                 landscape: '/image/java.jpg'
             },
             thumbnail: {
-                portrait: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&h=300&fit=crop',
+                portrait: '/image/java.jpg',
                 landscape: '/image/java.jpg'
             },
             skills: ['ES6+', 'Async/Await', 'Design Patterns', 'OOP'],
@@ -78,11 +78,11 @@ const Certificate = () => {
             credential: '0008902ETEC',
             image: '',
             certificateImage: {
-                portrait: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=600&fit=contain',
+                portrait: '/image/frontend.jpg',
                 landscape: '/image/frontend.jpg'
             },
             thumbnail: {
-                portrait: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
+                portrait: '/image/frontend.jpg',
                 landscape: '/image/frontend.jpg'
             },
             skills: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'ReactJs'],
@@ -99,11 +99,11 @@ const Certificate = () => {
             credential: '0009702ETEC',
             image: '',
             certificateImage: {
-                portrait: 'https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=400&h=600&fit=contain',
+                portrait: '/image/network.png',
                 landscape: '/image/network.png'
             },
             thumbnail: {
-                portrait: 'https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=400&h=300&fit=crop',
+                portrait: '/image/network.png',
                 landscape: '/image/network.png'
             },
             skills: ['Computer', 'Networking'],
@@ -120,11 +120,11 @@ const Certificate = () => {
             credential: 'Room22 table542',
             image: '',
             certificateImage: {
-                portrait: 'https://images.unsplash.com/photo-1432889821006-2d28494f4aec?w=400&h=600&fit=contain',
+                portrait: '/image/deploma.jpg',
                 landscape: '/image/deploma.jpg'
             },
             thumbnail: {
-                portrait: 'https://images.unsplash.com/photo-1432889821006-2d28494f4aec?w=400&h=300&fit=crop',
+                portrait: '/image/deploma.jpg',
                 landscape: '/image/deploma.jpg'
             },
             skills: ['B', 'E', 'B', 'C', 'B', 'B', 'F'],
@@ -141,11 +141,11 @@ const Certificate = () => {
             credential: 'CRED-2023-178',
             image: '',
             certificateImage: {
-                portrait: 'https://images.unsplash.com/photo-1432889821006-2d28494f4aec?w=400&h=600&fit=contain',
+                portrait: '/image/buddha.jpg',
                 landscape: '/image/buddha.jpg'
             },
             thumbnail: {
-                portrait: 'https://images.unsplash.com/photo-1432889821006-2d28494f4aec?w=400&h=300&fit=crop',
+                portrait: '/image/buddha.jpg',
                 landscape: '/image/buddha.jpg'
             },
             skills: [],
@@ -162,11 +162,11 @@ const Certificate = () => {
             credential: 'CRED-2023-178',
             image: '',
             certificateImage: {
-                portrait: 'https://images.unsplash.com/photo-1432889821006-2d28494f4aec?w=400&h=600&fit=contain',
+                portrait: '/image/sikhasala.jpg',
                 landscape: '/image/sikhasala.jpg'
             },
             thumbnail: {
-                portrait: 'https://images.unsplash.com/photo-1432889821006-2d28494f4aec?w=400&h=300&fit=crop',
+                portrait: '/image/sikhasala.jpg',
                 landscape: '/image/sikhasala.jpg'
             },
             skills: [],
@@ -183,11 +183,11 @@ const Certificate = () => {
             credential: 'CRED-2023-178',
             image: '',
             certificateImage: {
-                portrait: 'https://images.unsplash.com/photo-1432889821006-2d28494f4aec?w=400&h=600&fit=contain',
+                portrait: '/image/sikhasala1.jpg',
                 landscape: '/image/sikhasala1.jpg'
             },
             thumbnail: {
-                portrait: 'https://images.unsplash.com/photo-1432889821006-2d28494f4aec?w=400&h=300&fit=crop',
+                portrait: '/image/sikhasala1.jpg',
                 landscape: '/image/sikhasala1.jpg'
             },
             skills: [],
