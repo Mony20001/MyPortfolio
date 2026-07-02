@@ -1,6 +1,37 @@
 import React from 'react';
 
 const HeroSection = () => {
+  // Function to view CV in new tab
+  const handleViewCV = () => {
+    window.open('/image/MyCV.pdf', '_blank');
+  };
+
+  // Function to download CV
+  const handleDownloadCV = () => {
+    // Using fetch for better cross-browser compatibility
+    fetch('/image/MyCV.pdf')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('CV file not found');
+        }
+        return response.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Ra_Mony_CV.pdf'; // Custom filename
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Error downloading CV:', error);
+        alert('Failed to download CV. Please try again.');
+      });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Hello Kitty theme */}
@@ -55,11 +86,10 @@ const HeroSection = () => {
                 
                 {/* Main Profile Image Container */}
                 <div className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white shadow-2xl group-hover:scale-105 transition duration-500">
-                  {/* Fixed: Changed from backslashes to forward slashes for web compatibility */}
                   <img 
                     src="/image/profile.png" 
                     alt="Profile"
-                    className="w-full h-full object-cover "
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 
@@ -88,7 +118,7 @@ const HeroSection = () => {
               
               {/* Name Title */}
               <h1 id='Mony' className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
-                <span  className="bg-gradient-to-r from-pink-700 via-rose-500 to-pink-600 bg-clip-text text-transparent drop-shadow-2xl">
+                <span className="bg-gradient-to-r from-pink-700 via-rose-500 to-pink-600 bg-clip-text text-transparent drop-shadow-2xl">
                   រ៉ា​ មុនី
                 </span>
               </h1>
@@ -110,17 +140,25 @@ const HeroSection = () => {
                 <span className="text-rose-500 font-bold"> Engineering </span>. 
               </p>
               
-              {/* CTA Buttons */}
+              {/* CTA Buttons - FIXED WITH PROPER HANDLERS */}
               <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
-                <button className="group relative bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold py-3 px-8 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden text-sm md:text-base">
+                {/* View CV Button */}
+                <button 
+                  onClick={handleViewCV}
+                  className="group relative bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold py-3 px-8 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden text-sm md:text-base"
+                >
                   <span className="relative z-10 flex items-center gap-2">
-                    <span>🐱</span> VIEW CV <span>🎨</span>
+                    <span>👁️</span> VIEW CV <span>📄</span>
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
                 
-                <button className="bg-white/50 backdrop-blur-md border-2 border-pink-400 text-pink-700 font-bold py-3 px-8 rounded-full hover:bg-white/70 hover:border-pink-500 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg text-sm md:text-base">
-                  <span>💌</span> CONTACT ME <span>📧</span>
+                {/* Download CV Button */}
+                <button 
+                  onClick={handleDownloadCV}
+                  className="bg-white/50 backdrop-blur-md border-2 border-pink-400 text-pink-700 font-bold py-3 px-8 rounded-full hover:bg-white/70 hover:border-pink-500 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg text-sm md:text-base"
+                >
+                  <span>⬇️</span> Download CV <span>📧</span>
                 </button>
               </div>
               
