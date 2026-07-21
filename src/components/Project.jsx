@@ -55,23 +55,23 @@ const Project = () => {
             description: 'Website System for restuarant',
             tech: ['Vue', 'Java Scrip', 'Tailwind', 'API'],
             github: 'https://github.com/Mony20001/System.git',
-            demo: 'http://localhost:5174/auth/login',
+            demo: 'https://restuarantkh.vercel.app/',
             featured: true,
             year: '2026'
         },
-        // {
-        //     id: 4,
-        //     title: 'Kitty Portfolio',
-        //     category: 'design',
-        //     image: 'https://via.placeholder.com/400x300/FFD1DC/FFFFFF?text=Kitty+Portfolio',
-        //     icon: '🎨',
-        //     description: 'Cute portfolio website with Hello Kitty animations and responsive design.',
-        //     tech: ['React', 'Framer Motion', 'Tailwind CSS', 'EmailJS'],
-        //     github: 'https://github.com',
-        //     demo: 'https://demo.com',
-        //     featured: false,
-        //     year: '2024'
-        // },
+        {
+            id: 4,
+            title: 'System Mart',
+            category: 'backend',
+            image: '/image/mart.png',
+            icon: '🎨',
+            description: 'System mart it just simple system  i bulit for assignments school',
+            tech: ['React', 'Json', 'Tailwind CSS', 'Java Scrip'],
+            github: 'https://github.com/Mony20001/system_mart.git',
+            demo: 'https://system-mart.vercel.app/',
+            featured: true,
+            year: '2026'
+        },
         // {
         //     id: 5,
         //     title: 'Kitty Analytics Dashboard',

@@ -13,7 +13,7 @@ const Certificate = () => {
             color: 'from-pink-400 to-purple-400',
             description: 'Completed Basic of C++ with practice and project',
             credential: '0009879ETEC',
-            image: '', // This should be a URL or emoji, but it's empty
+            image: '',
             certificateImage: {
                 portrait: '/image/c++.png',
                 landscape: '/image/c++.png'
@@ -192,6 +192,27 @@ const Certificate = () => {
             },
             skills: [],
             level: 'Beginner'
+        },
+        {
+            id: 10,
+            title: 'Frontend Internship',
+            issuer: 'KRU IT',
+            date: 'July 15 2026',
+            icon: '📊',
+            color: 'from-red-400 to-pink-400',
+            description: 'Build Website about restuarant',
+            credential: '0002026130',
+            image: '',
+            certificateImage: {
+                portrait: '/image/frontend.png',
+                landscape: '/image/frontend.png'
+            },
+            thumbnail: {
+                portrait: '/image/frontend.png',
+                landscape: '/image/frontend.png'
+            },
+            skills: ['Vue','Tailwind','Java Scrip','Json'],
+            level: 'Beginner'
         }
     ];
 
@@ -302,25 +323,84 @@ const Certificate = () => {
             .clickable-area {
                 cursor: pointer;
             }
-            .full-certificate {
-                object-fit: contain;
-                width: 100%;
-                height: 100%;
-            }
-            .certificate-modal-image {
-                max-height: 70vh;
-                width: auto;
-                max-width: 100%;
-                object-fit: contain;
-            }
-            .certificate-container {
+            
+            /* FIXED: Improved certificate modal styles */
+            .certificate-modal-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                min-height: 300px;
-                background: #f5f5f5;
+                min-height: 400px;
+                background: #f8f9fa;
+                border-radius: 16px;
+                padding: 30px;
+                position: relative;
+            }
+            
+            .certificate-modal-image-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                min-height: 400px;
+            }
+            
+            .certificate-modal-image {
+                max-width: 100%;
+                max-height: 65vh;
+                width: auto;
+                height: auto;
+                object-fit: contain;
                 border-radius: 12px;
-                padding: 20px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+                transition: transform 0.3s ease;
+            }
+            
+            .certificate-modal-image:hover {
+                transform: scale(1.02);
+            }
+            
+            .certificate-placeholder {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 40px;
+                color: #999;
+                font-size: 1.1rem;
+            }
+            
+            .certificate-placeholder .icon {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+            }
+            
+            /* Modal overlay improvements */
+            .modal-overlay {
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+            
+            .modal-content {
+                max-height: 92vh;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: #f472b6 #fce7f3;
+            }
+            
+            .modal-content::-webkit-scrollbar {
+                width: 6px;
+            }
+            
+            .modal-content::-webkit-scrollbar-track {
+                background: #fce7f3;
+                border-radius: 3px;
+            }
+            
+            .modal-content::-webkit-scrollbar-thumb {
+                background: #f472b6;
+                border-radius: 3px;
             }
         `;
         document.head.appendChild(style);
@@ -330,6 +410,14 @@ const Certificate = () => {
     // Function to handle card click
     const handleCardClick = (cert) => {
         setSelectedCert(cert);
+        // Prevent body scroll when modal is open
+        document.body.style.overflow = 'hidden';
+    };
+
+    // Function to close modal
+    const closeModal = () => {
+        setSelectedCert(null);
+        document.body.style.overflow = 'auto';
     };
 
     return (
@@ -411,7 +499,6 @@ const Certificate = () => {
                                     flex items-center justify-center relative
                                     overflow-hidden
                                 `}>
-                                    {/* FIX 1: Remove opacity that was making images too transparent */}
                                     <img 
                                         src={getImage(cert.thumbnail, 'landscape')} 
                                         alt={cert.title}
@@ -425,7 +512,6 @@ const Certificate = () => {
                                     
                                     <div className="absolute inset-0 bg-gradient-to-t from-pink-900/60 via-pink-800/30 to-transparent"></div>
                                     
-                                    {/* FIX 2: Show icon only if image is empty or missing */}
                                     {(!cert.thumbnail || !getImage(cert.thumbnail, 'landscape')) && (
                                         <div className="absolute inset-0 flex items-center justify-center">
                                             <div className="text-8xl transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 drop-shadow-2xl">
@@ -536,16 +622,16 @@ const Certificate = () => {
             {/* Modal - Full Certificate View */}
             {selectedCert && (
                 <div 
-                    className="fixed inset-0 bg-black/80 backdrop-blur-lg flex items-center justify-center p-4 z-50 animate-fade-in"
-                    onClick={() => setSelectedCert(null)}
+                    className="fixed inset-0 modal-overlay flex items-center justify-center p-4 z-50 animate-fade-in"
+                    onClick={closeModal}
                 >
                     <div 
-                        className="bg-white rounded-3xl max-w-5xl w-full p-6 shadow-2xl relative animate-scale-in max-h-[95vh] overflow-y-auto border-2 border-pink-200"
+                        className="bg-white rounded-3xl max-w-5xl w-full p-6 shadow-2xl relative animate-scale-in modal-content border-2 border-pink-200"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Close Button */}
                         <button
-                            onClick={() => setSelectedCert(null)}
+                            onClick={closeModal}
                             className="absolute top-4 right-4 w-12 h-12 bg-pink-100 hover:bg-pink-200 rounded-full flex items-center justify-center transition-all text-pink-600 hover:rotate-90 duration-300 z-10 shadow-lg"
                         >
                             ✕
@@ -553,51 +639,77 @@ const Certificate = () => {
 
                         {/* Modal Content */}
                         <div className="text-center">
-                            {/* Full Certificate Image - Displayed Entirely */}
-                            <div className="relative mb-6 rounded-2xl overflow-hidden bg-gray-50 border-2 border-pink-200 p-4">
-                                <div className="certificate-container">
-                                    {/* Landscape - Full Certificate */}
-                                    <div className="hidden md:block w-full">
-                                        <img 
-                                            src={getImage(selectedCert.certificateImage, 'landscape')} 
-                                            alt={selectedCert.title}
-                                            className="certificate-modal-image"
-                                            onError={(e) => {
-                                                // FIX 3: Handle image loading errors
-                                                e.target.style.display = 'none';
-                                                e.target.parentElement.innerHTML = `
-                                                    <div class="flex items-center justify-center p-8 text-gray-400">
-                                                        <span class="text-6xl">📜</span>
-                                                        <span class="ml-3">Certificate Image Not Available</span>
+                            {/* Full Certificate Image - Centered */}
+                            <div className="relative mb-6 rounded-2xl overflow-hidden bg-gray-50/80 border-2 border-pink-200 p-4">
+                                <div className="certificate-modal-container">
+                                    <div className="certificate-modal-image-wrapper">
+                                        {/* Try landscape first, fallback to portrait */}
+                                        {(() => {
+                                            const landscapeImage = getImage(selectedCert.certificateImage, 'landscape');
+                                            const portraitImage = getImage(selectedCert.certificateImage, 'portrait');
+                                            
+                                            if (landscapeImage) {
+                                                return (
+                                                    <img 
+                                                        src={landscapeImage} 
+                                                        alt={`${selectedCert.title} Certificate`}
+                                                        className="certificate-modal-image hidden md:block"
+                                                        onError={(e) => {
+                                                            e.target.style.display = 'none';
+                                                            // Try portrait as fallback
+                                                            const parent = e.target.parentElement;
+                                                            const portraitImg = document.createElement('img');
+                                                            portraitImg.src = portraitImage || landscapeImage;
+                                                            portraitImg.className = 'certificate-modal-image block md:hidden';
+                                                            portraitImg.alt = `${selectedCert.title} Certificate`;
+                                                            portraitImg.onerror = () => {
+                                                                parent.innerHTML = `
+                                                                    <div class="certificate-placeholder">
+                                                                        <div class="icon">📜</div>
+                                                                        <p>Certificate Image Not Available</p>
+                                                                        <p class="text-sm mt-2 text-gray-400">${selectedCert.title}</p>
+                                                                    </div>
+                                                                `;
+                                                            };
+                                                            parent.appendChild(portraitImg);
+                                                        }}
+                                                    />
+                                                );
+                                            } else if (portraitImage) {
+                                                return (
+                                                    <img 
+                                                        src={portraitImage} 
+                                                        alt={`${selectedCert.title} Certificate`}
+                                                        className="certificate-modal-image block"
+                                                        onError={(e) => {
+                                                            e.target.style.display = 'none';
+                                                            e.target.parentElement.innerHTML = `
+                                                                <div class="certificate-placeholder">
+                                                                    <div class="icon">📜</div>
+                                                                    <p>Certificate Image Not Available</p>
+                                                                    <p class="text-sm mt-2 text-gray-400">${selectedCert.title}</p>
+                                                                </div>
+                                                            `;
+                                                        }}
+                                                    />
+                                                );
+                                            } else {
+                                                return (
+                                                    <div className="certificate-placeholder">
+                                                        <div className="icon">📜</div>
+                                                        <p>Certificate Image Not Available</p>
+                                                        <p className="text-sm mt-2 text-gray-400">{selectedCert.title}</p>
                                                     </div>
-                                                `;
-                                            }}
-                                        />
-                                    </div>
-                                    
-                                    {/* Portrait - Full Certificate */}
-                                    <div className="md:hidden w-full">
-                                        <img 
-                                            src={getImage(selectedCert.certificateImage, 'portrait')} 
-                                            alt={selectedCert.title}
-                                            className="certificate-modal-image"
-                                            onError={(e) => {
-                                                e.target.style.display = 'none';
-                                                e.target.parentElement.innerHTML = `
-                                                    <div class="flex items-center justify-center p-8 text-gray-400">
-                                                        <span class="text-6xl">📜</span>
-                                                        <span class="ml-3">Certificate Image Not Available</span>
-                                                    </div>
-                                                `;
-                                            }}
-                                        />
+                                                );
+                                            }
+                                        })()}
                                     </div>
                                 </div>
                                 
                                 {/* Certificate Watermark */}
                                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                                    <div className="bg-white/90 backdrop-blur-sm px-6 py-2 rounded-full border-2 border-pink-200 shadow-lg">
-                                        <span className="text-sm font-semibold text-pink-600">
+                                    <div className="bg-white/95 backdrop-blur-sm px-6 py-2 rounded-full border-2 border-pink-200 shadow-lg">
+                                        <span className="text-sm font-semibold text-pink-600 whitespace-nowrap">
                                             📜 {selectedCert.title} - Full Certificate
                                         </span>
                                     </div>
@@ -654,7 +766,7 @@ const Certificate = () => {
                                     <span>🎀</span> Share Achievement
                                 </button>
                                 <button 
-                                    onClick={() => setSelectedCert(null)}
+                                    onClick={closeModal}
                                     className="px-6 py-3 bg-pink-50 text-pink-600 rounded-full hover:bg-pink-100 transition-all border-2 border-pink-200"
                                 >
                                     Close
